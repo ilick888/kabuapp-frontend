@@ -10,6 +10,7 @@ import {
     TableRowColumn
   } from 'material-ui/Table'
 import _ from 'lodash';
+import CandleChart from './candlechart';
   
 
 
@@ -17,15 +18,20 @@ import _ from 'lodash';
 class HelloIndex extends Component{
 
     componentDidMount(){
-        this.props.readEvents()
+        const { id } = this.props.match.params
+        if (id) this.props.readEvents(id)
     }
 
     renderEvents(){
         return _.map(this.props.events, event => (
-          <TableRow key={event.id}>
-            <TableRowColumn>{event.id}</TableRowColumn>
-            <TableRowColumn>{event.title}</TableRowColumn>
-            <TableRowColumn>{event.subtitle}</TableRowColumn>
+          <TableRow key={event.date}>
+            <TableRowColumn>{event.date}</TableRowColumn>
+            <TableRowColumn>{event.open}</TableRowColumn>
+            <TableRowColumn>{event.high}</TableRowColumn>
+            <TableRowColumn>{event.low}</TableRowColumn>
+            <TableRowColumn>{event.close}</TableRowColumn>
+            <TableRowColumn>{event.volume}</TableRowColumn>
+            <TableRowColumn>{event.adjustment}</TableRowColumn>
           </TableRow> 
         ))
     }
@@ -35,12 +41,17 @@ class HelloIndex extends Component{
     render(){
         return (
             <React.Fragment>
+                <CandleChart/>
                 <Table>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
                         <TableRow>
-                        <TableHeaderColumn>ID</TableHeaderColumn>
-                        <TableHeaderColumn>Title</TableHeaderColumn>
-                        <TableHeaderColumn>Subtitle</TableHeaderColumn>
+                            <TableHeaderColumn>日付</TableHeaderColumn>
+                            <TableHeaderColumn>始値</TableHeaderColumn>
+                            <TableHeaderColumn>高値</TableHeaderColumn>
+                            <TableHeaderColumn>安値</TableHeaderColumn>
+                            <TableHeaderColumn>終値</TableHeaderColumn>
+                            <TableHeaderColumn>出来高</TableHeaderColumn>
+                            <TableHeaderColumn>終値調整</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody displayRowCheckbox={false}>

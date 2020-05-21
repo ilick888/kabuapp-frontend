@@ -20,7 +20,7 @@ ReactDOM.render(
       <Provider store={store}>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={HelloIndex} />
+            <Route exact path="/:id" component={HelloIndex} />
           </Switch>
         </BrowserRouter>
       </Provider>
