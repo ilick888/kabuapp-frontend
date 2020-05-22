@@ -17,31 +17,30 @@ import CandleChart from './candlechart';
 
 class HelloIndex extends Component{
 
-    componentDidMount(){
+    constructor (props){
+        super(props)
         const { id } = this.props.match.params
-        if (id) this.props.readEvents(id)
+        if (id) this.props.readEvents(id) 
     }
 
     renderEvents(){
-        return _.map(this.props.events, event => (
-          <TableRow key={event.date}>
-            <TableRowColumn>{event.date}</TableRowColumn>
-            <TableRowColumn>{event.open}</TableRowColumn>
-            <TableRowColumn>{event.high}</TableRowColumn>
-            <TableRowColumn>{event.low}</TableRowColumn>
-            <TableRowColumn>{event.close}</TableRowColumn>
-            <TableRowColumn>{event.volume}</TableRowColumn>
-            <TableRowColumn>{event.adjustment}</TableRowColumn>
+        return _.map(this.props.stock_prices, price => (
+          <TableRow key={price.date}>
+            <TableRowColumn>{price.date}</TableRowColumn>
+            <TableRowColumn>{price.open}</TableRowColumn>
+            <TableRowColumn>{price.high}</TableRowColumn>
+            <TableRowColumn>{price.low}</TableRowColumn>
+            <TableRowColumn>{price.close}</TableRowColumn>
+            <TableRowColumn>{price.volume}</TableRowColumn>
+            <TableRowColumn>{price.adjustment}</TableRowColumn>
           </TableRow> 
         ))
     }
 
-    
-    
     render(){
         return (
             <React.Fragment>
-                <CandleChart/>
+                <CandleChart stock_prices={this.props.stock_prices}/>
                 <Table>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
                         <TableRow>
@@ -64,7 +63,7 @@ class HelloIndex extends Component{
     }
 }
 
-const mapStateToProps = state => ({ events : state.hello })
+const mapStateToProps = state => ({ stock_prices : state.stock_price })
 const mapDispatchToProps = { readEvents }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HelloIndex)
