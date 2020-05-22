@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Chart } from "react-google-charts";
 import _ from 'lodash';
+import { CircularProgress } from '@material-ui/core';
+
 
 
 class CandleChart extends Component{
 
+    constructor(props){
+        super(props)
+        this.state = {
+            loading :true,
+        }
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            loading: false,
+        })
+    }
+
     setjson(){
         var data = []
-        _.map(this.props.events, event => (
-            data.unshift([event.date, event.low, event.open, event.close, event.high])
+        _.map(this.props.stock_prices, price => (
+            data.unshift([price.date, price.low, price.open, price.close, price.high])
         ))
         var datas = data.slice(200,300)
         datas.unshift(['day', 'a', 'b', 'c', 'd'])
@@ -17,13 +31,16 @@ class CandleChart extends Component{
     }
 
     render(){
+        if(this.state.loading){
+            return null
+        }
         return (
             <React.Fragment>
                 <Chart
                     width={'100%'}
                     height={350}
                     chartType="CandlestickChart"
-                    loader={<div>Loading Chart</div>}
+                    loader={<CircularProgress/>}
                     data={
                         this.setjson()
                     }
@@ -37,7 +54,5 @@ class CandleChart extends Component{
     }
 }
 
-const mapStateToProps = state => ({ events : state.hello })
-
-export default connect(mapStateToProps, null)(CandleChart)
+export default CandleChart
 

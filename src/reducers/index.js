@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import hello from './hello'
+import stock_price from './stock_price'
 
-export default combineReducers({ hello })
+export default combineReducers({ stock_price })
