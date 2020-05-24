@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { readEvents } from "../actions";
+import { readStockPrice } from "../actions/action_stock_price";
 import {
     Table,
     TableBody,
@@ -11,6 +11,8 @@ import {
   } from 'material-ui/Table'
 import _ from 'lodash';
 import CandleChart from './candlechart';
+import Appbar from 'material-ui/AppBar';
+import CurrentPrice from './current_price';
   
 
 
@@ -20,7 +22,7 @@ class HelloIndex extends Component{
     constructor (props){
         super(props)
         const { id } = this.props.match.params
-        if (id) this.props.readEvents(id) 
+        if (id) this.props.readStockPrice(id) 
     }
 
     renderEvents(){
@@ -40,7 +42,9 @@ class HelloIndex extends Component{
     render(){
         return (
             <React.Fragment>
-                <CandleChart stock_prices={this.props.stock_prices}/>
+                <Appbar title="KABUAPP"/>
+                <CurrentPrice id={this.props.match.params}/>
+                <CandleChart/>
                 <Table>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
                         <TableRow>
@@ -64,7 +68,7 @@ class HelloIndex extends Component{
 }
 
 const mapStateToProps = state => ({ stock_prices : state.stock_price })
-const mapDispatchToProps = { readEvents }
+const mapDispatchToProps = { readStockPrice }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HelloIndex)
 

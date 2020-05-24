@@ -1,4 +1,4 @@
-import { READ_STOCK_PRICE } from "../actions";
+import { READ_STOCK_PRICE } from "../actions/action_stock_price";
 
 export default (stock_price = {}, action) => {
     switch(action.type){
