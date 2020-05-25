@@ -50,7 +50,6 @@ class CandleChart extends Component{
             <React.Fragment>
                 <Chart
                     width={'100%'}
-                    height={350}
                     chartType="CandlestickChart"
                     loader={<CircularProgress/>}
                     data={
