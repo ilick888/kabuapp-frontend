@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { readCurrentPrice } from '../actions/action_current_price'
+import { readCurrentPrice } from '../actions/action_current_price';
+import Title from './title';
 
 class CurrentPrice extends Component{
 
@@ -23,8 +24,8 @@ class CurrentPrice extends Component{
     render(){
         return (
             <React.Fragment>
-                <div>銘柄名:{this.props.current_price.name}</div>
-                <div>現在価格:{this.props.current_price.price}</div>
+                <Title>銘柄名:{this.props.current_price.name}</Title>
+                <Title>現在価格:{this.props.current_price.price}</Title>
             </React.Fragment>
         )
     }
