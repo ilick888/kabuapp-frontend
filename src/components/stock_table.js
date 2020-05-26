@@ -21,7 +21,9 @@ class StockTable extends Component{
     }
 
     renderEvents(){
-        return _.map(this.props.stock_prices, price => (
+        const slice_data = this.props.stock_prices
+        console.log(slice_data)
+        return _.map(slice_data, price => (
           <TableRow key={price.date}>
             <TableRowColumn>{price.date}</TableRowColumn>
             <TableRowColumn>{price.open}</TableRowColumn>
