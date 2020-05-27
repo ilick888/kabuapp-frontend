@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
 import { Chart } from "react-google-charts";
 import _ from 'lodash';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import { connect } from 'react-redux';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+
+
+const useStyles = theme => ({
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(4),
+    display: 'flex',
+  },
+  fixedChartHeight: {
+    height: 400
+  },
+  fixedLabelHeight: {
+    height: 50
+  },
+});
 
 
 
@@ -43,13 +61,19 @@ class CandleChart extends Component{
     };
 
     render(){
+      const { classes } = this.props;
+
         if(this.state.loading){
             return null
         }
         return (
             <React.Fragment>
+              <Grid Container spacing={3} direction="column">
+                <Grid item >
+                  <Paper className={clsx(classes.paper, classes.fixedChartHeight)}>
                 <Chart
                     width={'100%'}
+                    height={'100%'}
                     chartType="CandlestickChart"
                     loader={<CircularProgress/>}
                     data={
@@ -65,12 +89,12 @@ class CandleChart extends Component{
                     }}
                     rootProps={{ 'data-testid': '1' }}
                     />
-                <Card>
-                    <CardContent>
-                        <InputLabel shrink htmlFor="age-native-label-placeholder">
-                            表示期間
-                        </InputLabel>
-                        <NativeSelect
+                    </Paper>
+                  </Grid>
+                  <Grid item>
+                    <Paper className={clsx(classes.paper, classes.fixedLabelHeight)}>
+                        表示期間
+                    <NativeSelect
                         value={this.state.slice}
                         onChange={(e) => this.handleChangeSlice(e)}
                         >
@@ -79,14 +103,15 @@ class CandleChart extends Component{
                         <option value={200}>100日</option>
                         <option value={270}>30日</option>
                         <option value={293}>7日</option>
-                        </NativeSelect>
-                    </CardContent>
-                </Card>
+                    </NativeSelect>
+                    </Paper>
+                  </Grid>
+                </Grid>
             </React.Fragment>    
         )
     }
 }
 const mapStateToProps = state => ({ stock_prices : state.stock_price })
 
-export default connect(mapStateToProps, null)(CandleChart)
+export default  connect(mapStateToProps, null)(withStyles(useStyles)(CandleChart))
 

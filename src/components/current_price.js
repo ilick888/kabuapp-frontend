@@ -18,7 +18,6 @@ class CurrentPrice extends Component{
         this.setState({
             loading: false,
         })
-        console.log(this.props)
     }
 
     render(){

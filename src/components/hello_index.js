@@ -99,7 +99,7 @@ const useStyles = theme => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 400,
   },
 });
 
@@ -109,7 +109,7 @@ class HelloIndex extends Component{
   constructor(props){
     super(props)
     this.state={
-      open: true
+      open: false
     }
   }
 
@@ -176,9 +176,7 @@ class HelloIndex extends Component{
               <Grid container spacing={3}>
                 {/* Chart */}
                 <Grid item xs={12} md={8} lg={9}>
-                  <Paper className={fixedHeightPaper}>
                     <CandleChart />
-                  </Paper>
                 </Grid>
                 {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
