@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { readStockPrice } from "../actions/action_stock_price";
 import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn
   } from 'material-ui/Table'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import _ from 'lodash';
 
 
@@ -22,16 +21,15 @@ class StockTable extends Component{
 
     renderEvents(){
         const slice_data = this.props.stock_prices
-        console.log(slice_data)
         return _.map(slice_data, price => (
           <TableRow key={price.date}>
-            <TableRowColumn>{price.date}</TableRowColumn>
-            <TableRowColumn>{price.open}</TableRowColumn>
-            <TableRowColumn>{price.high}</TableRowColumn>
-            <TableRowColumn>{price.low}</TableRowColumn>
-            <TableRowColumn>{price.close}</TableRowColumn>
-            <TableRowColumn>{price.volume}</TableRowColumn>
-            <TableRowColumn>{price.adjustment}</TableRowColumn>
+            <TableCell>{price.date}</TableCell>
+            <TableCell>{price.open}</TableCell>
+            <TableCell>{price.high}</TableCell>
+            <TableCell>{price.low}</TableCell>
+            <TableCell>{price.close}</TableCell>
+            <TableCell>{price.volume}</TableCell>
+            <TableCell>{price.adjustment}</TableCell>
           </TableRow> 
         ))
     }
@@ -40,18 +38,18 @@ class StockTable extends Component{
         return (
             <React.Fragment>
                 <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}> 
+                    <TableHead> 
                         <TableRow>
-                            <TableHeaderColumn>日付</TableHeaderColumn>
-                            <TableHeaderColumn>始値</TableHeaderColumn>
-                            <TableHeaderColumn>高値</TableHeaderColumn>
-                            <TableHeaderColumn>安値</TableHeaderColumn>
-                            <TableHeaderColumn>終値</TableHeaderColumn>
-                            <TableHeaderColumn>出来高</TableHeaderColumn>
-                            <TableHeaderColumn>終値調整</TableHeaderColumn>
+                            <TableCell>日付</TableCell>
+                            <TableCell>始値</TableCell>
+                            <TableCell>高値</TableCell>
+                            <TableCell>安値</TableCell>
+                            <TableCell>終値</TableCell>
+                            <TableCell>出来高</TableCell>
+                            <TableCell>終値調整</TableCell>
                         </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
+                    </TableHead>
+                    <TableBody>
                         {this.renderEvents()}
                     </TableBody>
                 </Table>
