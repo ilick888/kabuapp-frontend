@@ -101,6 +101,9 @@ const useStyles = theme => ({
   fixedHeight: {
     height: 400,
   },
+  fixedHeightFill: {
+    height: "100%",
+  },
 });
 
 
@@ -109,13 +112,22 @@ class HelloIndex extends Component{
   constructor(props){
     super(props)
     this.state={
-      open: false
+      open: false,
+      variant: "permanent",
+    }
+  }
+
+  componentDidMount(){
+    if(window.innerWidth < 500){
+      this.setState({
+        variant: null
+      })
     }
   }
 
   handleDrawerOpen = () => {
       this.setState({
-          open: true
+          open: true,
       });
   };
 
@@ -128,8 +140,6 @@ class HelloIndex extends Component{
   render(){
 
     const { classes } = this.props;
-
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
       return (
         <div className={classes.root}>
@@ -154,7 +164,7 @@ class HelloIndex extends Component{
                 </Toolbar>
             </AppBar>
             <Drawer
-              variant="permanent"
+              variant={this.state.variant}
               classes={{
                 paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
               }}
@@ -180,7 +190,7 @@ class HelloIndex extends Component{
                 </Grid>
                 {/* Recent Deposits */}
                 <Grid item xs={12} md={4} lg={3}>
-                  <Paper className={fixedHeightPaper}>
+                  <Paper className={clsx(classes.paper, classes.fixedHeightFill)}>
                     <CurrentPrice id={this.props.match.params}/>
                   </Paper>
                 </Grid>

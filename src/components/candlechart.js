@@ -11,11 +11,14 @@ import clsx from 'clsx';
 
 const useStyles = theme => ({
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
+    paddingBottom: theme.spacing(3),
+  },  
+  select: {
+    display: 'flex',
+    width: "100%"
+  },  
   paper: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
     display: 'flex',
   },
   fixedChartHeight: {
@@ -39,9 +42,9 @@ class CandleChart extends Component{
     }
 
     componentWillReceiveProps() {
-        this.setState({
-            loading: false,
-        })
+      this.setState({
+        loading: false
+      })
     }
 
     setjson(){
@@ -64,12 +67,12 @@ class CandleChart extends Component{
       const { classes } = this.props;
 
         if(this.state.loading){
-            return null
+          return <CircularProgress/>
         }
         return (
             <React.Fragment>
-              <Grid Container spacing={3} direction="column">
-                <Grid item >
+              <Grid container direction="column">
+                <Grid item className={classes.container} xs={12} md={12} lg={12}>
                   <Paper className={clsx(classes.paper, classes.fixedChartHeight)}>
                 <Chart
                     width={'100%'}
@@ -86,15 +89,20 @@ class CandleChart extends Component{
                             easing: 'out',
                             startup: true,
                           },
+                        axisTitlesPosition: "in",
+                        chartArea:{
+                          top: 30, 
+                          width: "80%",
+                          height: "75%"
+                        }
                     }}
                     rootProps={{ 'data-testid': '1' }}
                     />
                     </Paper>
                   </Grid>
                   <Grid item>
-                    <Paper className={clsx(classes.paper, classes.fixedLabelHeight)}>
-                        表示期間
-                    <NativeSelect
+                    <Paper className={clsx(classes.paper)}>
+                    <NativeSelect className={classes.select}
                         value={this.state.slice}
                         onChange={(e) => this.handleChangeSlice(e)}
                         >
@@ -111,7 +119,7 @@ class CandleChart extends Component{
         )
     }
 }
-const mapStateToProps = state => ({ stock_prices : state.stock_price })
+const mapStateToProps = state => ({ stock_prices : state.stock_price})
 
 export default  connect(mapStateToProps, null)(withStyles(useStyles)(CandleChart))
 
