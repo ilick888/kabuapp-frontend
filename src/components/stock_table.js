@@ -20,7 +20,9 @@ class StockTable extends Component{
     }
 
     renderEvents(){
-        const slice_data = this.props.stock_prices
+        const slice_data = Object.fromEntries(
+            Object.entries(this.props.stock_prices).slice(0, 5)
+        )        
         return _.map(slice_data, price => (
           <TableRow key={price.date}>
             <TableCell>{price.date}</TableCell>

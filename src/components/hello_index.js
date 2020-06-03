@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
+import CommentList from './comment_list';
 
   
 
@@ -192,6 +193,16 @@ class HelloIndex extends Component{
                 <Grid item xs={12} md={4} lg={3}>
                   <Paper className={clsx(classes.paper, classes.fixedHeightFill)}>
                     <CurrentPrice id={this.props.match.params}/>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                  <Paper className={classes.paper}>
+                    <CommentList id={this.props.match.params}/>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                  <Paper className={classes.paper}>
+                    input
                   </Paper>
                 </Grid>
                 {/* Recent Orders */}
