@@ -20,6 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { withStyles } from '@material-ui/core/styles';
 import CommentList from './comment_list';
+import CommentPost from './comment_post';
 
   
 
@@ -202,7 +203,7 @@ class HelloIndex extends Component{
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <Paper className={classes.paper}>
-                    input
+                    <CommentPost id={this.props.match.params}/>
                   </Paper>
                 </Grid>
                 {/* Recent Orders */}
