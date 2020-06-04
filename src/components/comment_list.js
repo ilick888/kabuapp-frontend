@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import { readCommentByStock } from '../actions/action_comment'
 import { Card } from '@material-ui/core';
 import { CardContent, Typography } from '@material-ui/core';
+import Title from './title';
 
 const formatDate = (date, format) => {
     format = format.replace(/yyyy/g, date.getFullYear());
@@ -30,12 +29,12 @@ class CommentList extends Component{
     renderComment(){
         const slice_data = Object.fromEntries(
             Object.entries(this.props.comments).slice(0, 5)
-        ) 
+        )
         return _.map(slice_data, comment => (
             <Card key={comment.id}>
                 <CardContent>
                     <Typography>{comment.comment}</Typography>
-                    <Typography>{Date(comment.created_at)}</Typography>
+                    <Typography>{formatDate(new Date(comment.created_at),'yyyy-MM-dd HH:mm')}</Typography>
                 </CardContent>
             </Card>
         ))
@@ -44,6 +43,7 @@ class CommentList extends Component{
     render(){
         return (
         <React.Fragment>
+            <Title>みんなのコメント</Title>
             {this.renderComment()}
         </React.Fragment>
         )
