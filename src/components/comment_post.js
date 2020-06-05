@@ -30,26 +30,23 @@ const renderTextArea = ({
 
 class CommentPost extends Component{
 
-    constructor(props){
-        super(props)
-        this.onSubmit = this.onSubmit.bind(this)
+    submit = async (values) => {
+        const params = {
+            stock: this.props.id.id,
+            comment: values.textarea
+        }
+        await this.props.createComment(params)
     }
 
-
-    async onSubmit(values){
-        await this.props.createComment(values)
-    }
 
     render(){
 
-        const { classes, handleSubmit, send } = this.props
-    
-        const style = {width : '100%'}
+        const { handleSubmit } = this.props
     
         return (
           <React.Fragment>
             <Title>コメント投稿</Title>
-            <form onSubmit={handleSubmit(this.onSubmit)}>
+            <form onSubmit={handleSubmit(this.submit)}>
               <div>
               <Field name='textarea' label='comment' component={renderTextArea} required />              
               </div>
@@ -65,14 +62,14 @@ class CommentPost extends Component{
 
 const validate = values => {
     const errors = {}
-  
-    if (!values.comment) errors.comment = "Enter a title, please."
-  
+
+    if (!values.comment) errors.comment = "Enter please."
+    if (values.length > 140) errors.comment = "too Long"
     return errors
   }
   
   const mapDispatchToProps = { createComment }
   
   export default connect(null, mapDispatchToProps)(
-    reduxForm({ validate, form: 'eventNewForm' })(CommentPost)
+    reduxForm({ validate, form: 'createComment' })(CommentPost)
   )

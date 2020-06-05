@@ -23,14 +23,24 @@ class CommentList extends Component{
     constructor(props){
         super(props)
         const { id } = this.props.id
+        this.state={
+            slice_data : {}
+        }
         if(id) this.props.readCommentByStock(id)
+    }
+
+    componentWillReceiveProps(){
+        const slice_data = Object.fromEntries(
+            Object.entries(this.props.comments).slice(0, 5)
+        )
+        this.setState({slice_data: slice_data})
     }
 
     renderComment(){
         const slice_data = Object.fromEntries(
             Object.entries(this.props.comments).slice(0, 5)
         )
-        return _.map(slice_data, comment => (
+        return _.map(this.state.slice_data, comment => (
             <Card key={comment.id}>
                 <CardContent>
                     <Typography>{comment.comment}</Typography>

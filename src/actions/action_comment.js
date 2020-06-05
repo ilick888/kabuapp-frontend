@@ -11,6 +11,6 @@ export const readCommentByStock = id => async (dispatch) => {
     dispatch({ type: READ_COMMENT, response})
 }
 export const createComment = values => async (dispatch) => {
-    const response = await axios.post(`${ROOT_URL}`,values)
+    const response = await axios.post(`${ROOT_URL}/`,values)
     dispatch({ type: CREATE_COMMENT, response})
 }
