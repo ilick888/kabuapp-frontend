@@ -5,8 +5,7 @@ export default (comments = {}, action) => {
         case READ_COMMENT:
             return action.response.data
         case CREATE_COMMENT:
-            const data = action.response.data
-            return { ...comments, [data.id] : data}
+            return { ...comments}
         default:
             return comments
     }

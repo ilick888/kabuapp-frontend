@@ -37,9 +37,6 @@ class CommentList extends Component{
     }
 
     renderComment(){
-        const slice_data = Object.fromEntries(
-            Object.entries(this.props.comments).slice(0, 5)
-        )
         return _.map(this.state.slice_data, comment => (
             <Card key={comment.id}>
                 <CardContent>

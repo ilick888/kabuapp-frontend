@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Card, TextField, Button } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl'
+import { TextField, Button } from '@material-ui/core';
 import Title from './title';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, reset } from 'redux-form';
 import { createComment } from '../actions/action_comment'
+import { withSnackbar } from 'notistack';
 
 const renderTextArea = ({
     input,
@@ -19,6 +19,7 @@ const renderTextArea = ({
       required={required}
       classes={{root: rootClass}}
       multiline
+      fullWidth
       rows={rows}
       error={!!(touched && error)}
       label={label}
@@ -30,13 +31,17 @@ const renderTextArea = ({
 
 class CommentPost extends Component{
 
-    submit = async (values) => {
+    submit = async (values, dispatch) => {
+        
         const params = {
             stock: this.props.id.id,
             comment: values.textarea
         }
         await this.props.createComment(params)
+        dispatch(reset("createComment"));
+        this.props.enqueueSnackbar('投稿しました', { variant: "success", autoHideDuration: 2000})
     }
+
 
 
     render(){
@@ -71,5 +76,5 @@ const validate = values => {
   const mapDispatchToProps = { createComment }
   
   export default connect(null, mapDispatchToProps)(
-    reduxForm({ validate, form: 'createComment' })(CommentPost)
+    reduxForm({ validate, form: 'createComment'})(withSnackbar(CommentPost))
   )

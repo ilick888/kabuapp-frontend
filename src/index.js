@@ -10,21 +10,24 @@ import './index.css';
 import HelloIndex from './components/hello_index';
 import reducer from './reducers';
 import * as serviceWorker from './serviceWorker';
+import { SnackbarProvider } from 'notistack';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk))
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
   <MuiThemeProvider>
-    <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/:id" component={HelloIndex} />
-          </Switch>
-        </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
+    <SnackbarProvider maxSnack={3}>
+      <React.StrictMode>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/:id" component={HelloIndex} />
+            </Switch>
+          </BrowserRouter>
+        </Provider>
+      </React.StrictMode>
+    </SnackbarProvider>
   </MuiThemeProvider>,
   document.getElementById('root')
 );
