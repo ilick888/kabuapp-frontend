@@ -11,12 +11,13 @@ import HelloIndex from './components/hello_index';
 import reducer from './reducers';
 import * as serviceWorker from './serviceWorker';
 import { SnackbarProvider } from 'notistack';
+import { theme } from './theme';
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk))
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
-  <MuiThemeProvider>
+  <MuiThemeProvider theme={theme}>
     <SnackbarProvider maxSnack={3}>
       <React.StrictMode>
         <Provider store={store}>
