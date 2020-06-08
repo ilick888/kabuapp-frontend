@@ -29,7 +29,9 @@ const useStyles = theme => ({
   },
 });
 
-
+const isEmpty = obj => {
+  return !Object.keys(obj).length;
+}
 
 class CandleChart extends Component{
 
@@ -41,10 +43,11 @@ class CandleChart extends Component{
         }
     }
 
-    componentWillReceiveProps() {
-      this.setState({
-        loading: false
-      })
+    static getDerivedStateFromProps(nextProps, prevState){
+      if(!isEmpty(nextProps.stock_prices)){
+        return { loading: false}
+      }
+      return null
     }
 
     setjson(){

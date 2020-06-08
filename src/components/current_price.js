@@ -14,10 +14,10 @@ class CurrentPrice extends Component{
         if (id) this.props.readCurrentPrice(id) 
     }
 
-    componentWillReceiveProps() {
-        this.setState({
-            loading: false,
-        })
+    static getDerivedStateFromProps(nextProps, prevState){
+        return {
+            loading: false 
+        }
     }
 
     render(){

@@ -29,11 +29,13 @@ class CommentList extends Component{
         if(id) this.props.readCommentByStock(id)
     }
 
-    componentWillReceiveProps(){
+    static getDerivedStateFromProps(nextProps, prevState){
         const slice_data = Object.fromEntries(
-            Object.entries(this.props.comments).slice(0, 5)
+            Object.entries(nextProps.comments).slice(0, 5)
         )
-        this.setState({slice_data: slice_data})
+        return {
+            slice_data: slice_data 
+        }
     }
 
     renderComment(){
