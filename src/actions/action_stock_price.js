@@ -1,11 +1,10 @@
 import axios from 'axios';
+import { root_url } from './url'
 
 export const READ_STOCK_PRICE = 'READ_STOCK_PRICE'
 
-const ROOT_URL = "http://0.0.0.0:8000/"
-
 
 export const readStockPrice = id => async (dispatch) => {
-    const response = await axios.get(`${ROOT_URL}${id}`)
+    const response = await axios.get(`${root_url}/${id}`)
     dispatch({ type: READ_STOCK_PRICE, response})
 }
