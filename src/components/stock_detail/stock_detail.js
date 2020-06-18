@@ -110,7 +110,7 @@ const useStyles = theme => ({
 });
 
 
-class HelloIndex extends Component{
+class StockDetail extends Component{
 
   constructor(props){
     super(props)
@@ -222,5 +222,5 @@ class HelloIndex extends Component{
   }
 }
 
-export default withStyles(useStyles)(HelloIndex)
+export default withStyles(useStyles)(StockDetail)
 

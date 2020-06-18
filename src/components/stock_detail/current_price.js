@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { readCurrentPrice } from '../actions/action_current_price';
-import Title from './title';
+import { readCurrentPrice } from '../../actions/action_current_price';
+import Title from '../title';
 
 class CurrentPrice extends Component{
 

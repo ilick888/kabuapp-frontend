@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
-import Title from './title';
+import Title from '../title';
 import { Field, reduxForm, reset } from 'redux-form';
-import { createComment } from '../actions/action_comment'
+import { createComment } from '../../actions/action_comment'
 import { withSnackbar } from 'notistack';
 
 const renderTextArea = ({

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { readCommentByStock } from '../actions/action_comment'
+import { readCommentByStock } from '../../actions/action_comment'
 import { Card } from '@material-ui/core';
 import { CardContent, Typography } from '@material-ui/core';
-import Title from './title';
+import Title from '../title';
 
 const formatDate = (date, format) => {
     format = format.replace(/yyyy/g, date.getFullYear());
