@@ -5,7 +5,7 @@ const config = () => {
       return 'http://0.0.0.0:8000'
     } else if (process.env.NODE_ENV === 'production') {
       // production
-      return 'http://34.84.109.76'
+      return 'http://35.200.56.131/'
     }
 }
 

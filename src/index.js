@@ -9,7 +9,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import './index.css';
 import firebase from 'firebase/app'
 import HelloIndex from './components/hello_index';
-import Login from './components/login';
+import Signin from './components/signin';
 import reducer from './reducers';
 import * as serviceWorker from './serviceWorker';
 import { SnackbarProvider } from 'notistack';
@@ -38,7 +38,7 @@ ReactDOM.render(
         <ReactReduxFirebaseProvider {...rrfProps}>
             <BrowserRouter>
               <Switch>
-                <Route exact path="/login" component={Login}/>
+                <Route exact path="/signin" component={Signin}/>
                 <Route exact path="/:id" component={HelloIndex} />
               </Switch>
             </BrowserRouter>
