@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { MuiThemeProvider } from '@material-ui/core/styles' 
 import './index.css';
 import firebase from 'firebase/app'
-import HelloIndex from './components/hello_index';
+import StockDetail from './components/stock_detail/stock_detail';
 import Signin from './components/signin';
 import reducer from './reducers';
 import * as serviceWorker from './serviceWorker';
@@ -39,7 +39,7 @@ ReactDOM.render(
             <BrowserRouter>
               <Switch>
                 <Route exact path="/signin" component={Signin}/>
-                <Route exact path="/:id" component={HelloIndex} />
+                <Route exact path="/:id" component={StockDetail} />
               </Switch>
             </BrowserRouter>
           </ReactReduxFirebaseProvider>
